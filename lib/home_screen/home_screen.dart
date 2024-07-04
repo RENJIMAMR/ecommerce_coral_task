@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shopping_application/dress_listing_screen/dress_listing_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,22 +10,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            height: 700,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        'https://images.pexels.com/photos/15253594/pexels-photo-15253594/free-photo-of-man-in-pink-suit-and-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=600'),
-                    fit: BoxFit.cover)),
-            child: Text(
-              'Define yourself in a unique way. ',
-              style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.w900,
-                  color: Color.fromARGB(255, 122, 36, 36),
-                  wordSpacing: 1),
-              textAlign: TextAlign.right,
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              height: 700,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          'https://images.pexels.com/photos/15253594/pexels-photo-15253594/free-photo-of-man-in-pink-suit-and-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=600'),
+                      fit: BoxFit.cover)),
+              child: Text(
+                'Define yourself in a unique way. ',
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.w900,
+                    color: Color.fromARGB(255, 122, 36, 36),
+                    wordSpacing: 1),
+                textAlign: TextAlign.right,
+              ),
             ),
           ),
           Padding(

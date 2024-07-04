@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shopping_application/dress_listing_screen/dress_listing_screen.dart';
 
 class DetailingScreen extends StatelessWidget {
-  const DetailingScreen({super.key});
+  const DetailingScreen(
+      {super.key,
+      required this.url,
+      required this.brand,
+      required this.price,
+      required this.rating,
+      required this.review,
+      required this.description});
+  final String url;
+  final String brand;
+  final String price;
+  final String rating;
+  final String review;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +29,12 @@ class DetailingScreen extends StatelessWidget {
             print('ontapped to listing screen');
           },
           onDoubleTap: () {
-            Navigator.push(context,
+            Navigator.pop(context,
                 MaterialPageRoute(builder: (context) => ListingScreen()));
             print('on double tapped to listing screen');
           },
           onLongPress: () {
-            Navigator.push(context,
+            Navigator.pop(context,
                 MaterialPageRoute(builder: (context) => ListingScreen()));
             print('on long pressed to listing screen');
           },
@@ -77,16 +91,16 @@ class DetailingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(children: [
-                      Container(
-                        height: 350,
-                        width: 350,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Color.fromARGB(66, 138, 117, 117),
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://images.pexels.com/photos/794062/pexels-photo-794062.jpeg?auto=compress&cs=tinysrgb&w=600'),
-                                fit: BoxFit.cover)),
+                      Center(
+                        child: Container(
+                          height: 350,
+                          width: 350,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Color.fromARGB(66, 138, 117, 117),
+                              image: DecorationImage(
+                                  image: NetworkImage(url), fit: BoxFit.cover)),
+                        ),
                       ),
                       Positioned(
                         top: 10,
@@ -110,7 +124,7 @@ class DetailingScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      'Casual Office Wears - Zaara',
+                      brand,
                       style:
                           TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                     ),
@@ -122,12 +136,12 @@ class DetailingScreen extends StatelessWidget {
                           color: Colors.amber,
                         ),
                         Text(
-                          '4.5/5',
+                          rating,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          ' (100 reviews)',
+                          review,
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.black.withOpacity(.6)),
@@ -138,7 +152,7 @@ class DetailingScreen extends StatelessWidget {
                       height: 25,
                     ),
                     Text(
-                      ' (The name says it all,trending casual wear collection from Zaara.Which includes an Overcoat, Full sleeved,high necked top with embroided Rose flower and a checked mini skirt )',
+                      description,
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                           fontSize: 14, color: Colors.black.withOpacity(.6)),
@@ -267,42 +281,45 @@ class DetailingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Price',
+                      "Price",
                       style: TextStyle(
                         fontSize: 15,
                       ),
                     ),
                     Text(
-                      'INR 5500/-',
+                      price,
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.w900),
                     ),
                   ],
                 ),
-                Spacer(),
-                Container(
-                  height: 45,
-                  width: 189,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(9),
-                    color: const Color.fromARGB(255, 12, 11, 11),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.shopping_bag_outlined,
-                        color: Colors.white,
-                        size: 23,
-                      ),
-                      Text(
-                        'Add to Cart',
-                        style: TextStyle(
+                SizedBox(
+                  width: 100,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(9),
+                      color: const Color.fromARGB(255, 12, 11, 11),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.local_mall_outlined,
                           color: Colors.white,
-                          fontSize: 18,
+                          size: 23,
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Add to Cart',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
