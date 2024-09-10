@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_application/cart_screen/cart_screen.dart';
+import 'package:shopping_application/controller/homescreen_controller.dart';
 import 'package:shopping_application/dress_detailing_screen/dress_detailing_screen.dart';
 
 class ListingScreen extends StatelessWidget {
@@ -167,303 +170,271 @@ class ListingScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(19),
-            child: Stack(children: [
-              Icon(
-                Icons.notifications_none_sharp,
-                size: 30,
-                color: Colors.black,
-              ),
-              Positioned(
-                right: 5,
-                top: 5,
-                child: CircleAvatar(
-                  radius: 6,
-                  backgroundColor: Colors.black,
-                  child: Text(
-                    '1',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 7,
-                        fontWeight: FontWeight.w700),
-                  ),
+          Stack(children: [
+            Icon(
+              Icons.notifications_none_sharp,
+              size: 30,
+              color: Colors.black,
+            ),
+            Positioned(
+              right: 5,
+              top: 5,
+              child: CircleAvatar(
+                radius: 6,
+                backgroundColor: Colors.black,
+                child: Text(
+                  '1',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 7,
+                      fontWeight: FontWeight.w700),
                 ),
-              )
-            ]),
-          )
+              ),
+            )
+          ]),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartScreen(),
+                    ));
+              },
+              icon: Icon(
+                Icons.shopping_bag,
+                color: Colors.black,
+              ))
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 13),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(11),
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey.withOpacity(.2),
-                    ),
+      body: Consumer<HomescreenController>(
+        builder: (context, homeProv, child) => homeProv.isCategoriesLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 13),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.search,
-                          color: Colors.black,
-                          size: 29,
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(11),
+                            height: 47,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey.withOpacity(.2),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 29,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Search anything',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 20,
                         ),
-                        Text(
-                          'Search anything',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500),
-                        )
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          height: 47,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.black,
+                          ),
+                          child: Icon(
+                            Icons.filter_list,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 47,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.black,
-                  ),
-                  child: Icon(
-                    Icons.filter_list,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 25,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.black,
-                  ),
-                  child: Text(
-                    '  All  ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 40,
-                  // width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.withOpacity(.3),
-                  ),
-                  child: Text(
-                    '   Men  ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 40,
-                  // width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.withOpacity(.3),
-                  ),
-                  child: Text(
-                    '  Women  ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 40,
-                  // width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.withOpacity(.3),
-                  ),
-                  child: Text(
-                    '  Kids  ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 40,
-                  // width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.withOpacity(.3),
-                  ),
-                  child: Text(
-                    '  New Born  ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Expanded(
-            child: GridView.builder(
-                itemCount: itemdetails.length,
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 260),
-                itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailingScreen(
-                                      url: itemdetails[index]['url'],
-                                      brand: itemdetails[index]['brand'],
-                                      price: itemdetails[index]['price'],
-                                      rating: itemdetails[index]["rating"],
-                                      review: itemdetails[index]['review'],
-                                      description: itemdetails[index]
-                                          ['description'],
-                                    )));
-                        print('ontapped to detailing  screen');
-                      },
-                      onDoubleTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailingScreen(
-                                      url: itemdetails[index]['url'],
-                                      brand: itemdetails[index]['brand'],
-                                      price: itemdetails[index]['price'],
-                                      rating: itemdetails[index]["rating"],
-                                      review: itemdetails[index]['review'],
-                                      description: itemdetails[index]
-                                          ['description'],
-                                    )));
-                        print('on double tapped to detailing  screen');
-                      },
-                      onLongPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailingScreen(
-                                      url: itemdetails[index]['url'],
-                                      brand: itemdetails[index]['brand'],
-                                      price: itemdetails[index]['price'],
-                                      rating: itemdetails[index]["rating"],
-                                      review: itemdetails[index]['review'],
-                                      description: itemdetails[index]
-                                          ['description'],
-                                    )));
-                        print('on long pressed to detailing  screen');
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
+                  //api integrtn
+
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        children: List.generate(
+                          homeProv.categoriesList.length,
+                          (index) => Row(
                             children: [
-                              Container(
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(.3),
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          itemdetails[index]['url']),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
+                              InkWell(
+                                onTap: () {
+                                  context
+                                      .read<HomescreenController>()
+                                      .getCategoryindex(index);
+                                },
                                 child: Container(
-                                  height: 35,
-                                  width: 35,
+                                  padding: EdgeInsets.all(8),
+                                  height: 40,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(6),
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        index == homeProv.selectedCategoryIndex
+                                            ? Colors.black
+                                            : Colors.grey,
                                   ),
-                                  child: Icon(
-                                    Icons.favorite_border,
-                                    size: 25,
+                                  child: Text(
+                                    homeProv.categoriesList[index]
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: index ==
+                                                homeProv.selectedCategoryIndex
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                width: 20,
+                              )
                             ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            itemdetails[index]['brand'],
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          Text(
-                            itemdetails[index]['price'],
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    )),
-          ),
-        ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Expanded(
+                    child: homeProv.isProductLoading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : GridView.builder(
+                            itemCount: itemdetails.length,
+                            padding: EdgeInsets.symmetric(horizontal: 25),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 0,
+                                    crossAxisSpacing: 10,
+                                    mainAxisExtent: 300),
+                            itemBuilder: (context, index) => InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailingScreen(
+                                                  url: homeProv
+                                                          .productList[index]
+                                                          .image
+                                                          .toString() ??
+                                                      '',
+                                                  brand: homeProv
+                                                          .productList[index]
+                                                          .title
+                                                          .toString() ??
+                                                      '',
+                                                  price:
+                                                      '₹${homeProv.productList[index].price.toString()}' ??
+                                                          '',
+                                                  rating: homeProv
+                                                          .productList[index]
+                                                          .rating
+                                                          .toString() ??
+                                                      '',
+                                                  review: '',
+                                                  description: homeProv
+                                                          .productList[index]
+                                                          .description
+                                                          .toString() ??
+                                                      '',
+                                                )));
+                                    print('ontapped to detailing  screen');
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: 200,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(.3),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(homeProv
+                                                          .productList[index]
+                                                          .image
+                                                          .toString() ??
+                                                      ''),
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: Container(
+                                              height: 35,
+                                              width: 35,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                              child: Icon(
+                                                Icons.favorite_border,
+                                                size: 25,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        maxLines: 1,
+                                        homeProv.productList[index].title
+                                                .toString() ??
+                                            '',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                      Text(
+                                        " ₹ ${homeProv.productList[index].price ?? 0}",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                  ),
+                ],
+              ),
       ),
     );
   }

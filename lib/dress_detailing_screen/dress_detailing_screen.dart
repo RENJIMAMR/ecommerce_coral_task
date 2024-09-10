@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shopping_application/dress_listing_screen/dress_listing_screen.dart';
 
 class DetailingScreen extends StatelessWidget {
@@ -27,16 +26,6 @@ class DetailingScreen extends StatelessWidget {
             Navigator.pop(context,
                 MaterialPageRoute(builder: (context) => ListingScreen()));
             print('ontapped to listing screen');
-          },
-          onDoubleTap: () {
-            Navigator.pop(context,
-                MaterialPageRoute(builder: (context) => ListingScreen()));
-            print('on double tapped to listing screen');
-          },
-          onLongPress: () {
-            Navigator.pop(context,
-                MaterialPageRoute(builder: (context) => ListingScreen()));
-            print('on long pressed to listing screen');
           },
           child: Icon(
             Icons.arrow_back,

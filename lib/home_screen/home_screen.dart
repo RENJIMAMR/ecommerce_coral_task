@@ -1,9 +1,29 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_application/controller/homescreen_controller.dart';
+
 import 'package:shopping_application/dress_listing_screen/dress_listing_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) async {
+        await context.read<HomescreenController>().getCategories();
+        await context.read<HomescreenController>().getAllProducts();
+      },
+    );
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               height: 700,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(
+                      image: CachedNetworkImageProvider(
                           'https://images.pexels.com/photos/15253594/pexels-photo-15253594/free-photo-of-man-in-pink-suit-and-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=600'),
                       fit: BoxFit.cover)),
               child: Text(
@@ -37,16 +57,6 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => ListingScreen()));
                 print('ontapped to listing screen');
-              },
-              onDoubleTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ListingScreen()));
-                print('on double tapped to listing screen');
-              },
-              onLongPress: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ListingScreen()));
-                print('on long pressed to listing screen');
               },
               child: Container(
                 height: 50,
