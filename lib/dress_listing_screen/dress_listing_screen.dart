@@ -341,30 +341,8 @@ class ListingScreen extends StatelessWidget {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 DetailingScreen(
-                                                  url: homeProv
-                                                          .productList[index]
-                                                          .image
-                                                          .toString() ??
-                                                      '',
-                                                  brand: homeProv
-                                                          .productList[index]
-                                                          .title
-                                                          .toString() ??
-                                                      '',
-                                                  price:
-                                                      '₹${homeProv.productList[index].price.toString()}' ??
-                                                          '',
-                                                  rating: homeProv
-                                                          .productList[index]
-                                                          .rating
-                                                          .toString() ??
-                                                      '',
-                                                  review: '',
-                                                  description: homeProv
-                                                          .productList[index]
-                                                          .description
-                                                          .toString() ??
-                                                      '',
+                                                  id: homeProv
+                                                      .productList[index].id!,
                                                 )));
                                     print('ontapped to detailing  screen');
                                   },

@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_application/controller/cart_screen_controller.dart';
 import 'package:shopping_application/controller/homescreen_controller.dart';
+import 'package:shopping_application/controller/product_detailing_screen_controller.dart';
 import 'package:shopping_application/home_screen/home_screen.dart';
 import 'package:shopping_application/model/cart_screen/cart_model.dart';
 
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartScreenController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductdetailScreenController(),
         )
       ],
       child: MaterialApp(

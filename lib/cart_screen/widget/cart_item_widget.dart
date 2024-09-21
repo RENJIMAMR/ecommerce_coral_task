@@ -22,7 +22,7 @@ class CartItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 200,
+        height: 150,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.blueGrey.withOpacity(.2)),
@@ -32,8 +32,8 @@ class CartItemWidget extends StatelessWidget {
               width: 10,
             ),
             Container(
-              height: 150,
-              width: 120,
+              height: 120,
+              width: 100,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: CachedNetworkImageProvider(image!)),
@@ -48,7 +48,7 @@ class CartItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 50,
+                  height: 10,
                 ),
                 Expanded(
                     child: Text(
@@ -56,22 +56,32 @@ class CartItemWidget extends StatelessWidget {
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 )),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Text(
                   price.toString(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Row(
                   children: [
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.,
                       children: [
-                        ElevatedButton(
-                            onPressed: onDecrement, child: Icon(Icons.remove)),
+                        SizedBox(
+                          height: 30,
+                          width: 55,
+                          child: ElevatedButton(
+                              onPressed: onDecrement,
+                              child: Center(
+                                  child: Text(
+                                '-',
+                                style: TextStyle(
+                                    fontSize: 23, fontWeight: FontWeight.bold),
+                              ))),
+                        ),
                         SizedBox(
                           width: 10,
                         ),
@@ -81,10 +91,20 @@ class CartItemWidget extends StatelessWidget {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          width: 8,
+                          width: 13,
                         ),
-                        ElevatedButton(
-                            onPressed: onIncrement, child: Icon(Icons.add)),
+                        SizedBox(
+                          height: 30,
+                          width: 55,
+                          child: ElevatedButton(
+                              onPressed: onIncrement,
+                              child: Center(
+                                  child: Text(
+                                '+',
+                                style: TextStyle(
+                                    fontSize: 21, fontWeight: FontWeight.bold),
+                              ))),
+                        ),
                       ],
                     ),
                     Spacer(),
@@ -97,9 +117,15 @@ class CartItemWidget extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 8,
+                ),
               ],
             )),
           ],
