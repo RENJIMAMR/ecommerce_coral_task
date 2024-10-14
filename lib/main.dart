@@ -8,11 +8,8 @@ import 'package:shopping_application/controller/product_detailing_screen_control
 import 'package:shopping_application/home_screen/home_screen.dart';
 import 'package:shopping_application/model/cart_screen/cart_model.dart';
 
-Future<void> main(List<String> args) async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive.registerAdapter<CartModel>(CartModelAdapter());
-  var box = await Hive.openBox<CartModel>('cartBox');
+Future<void> main(List<String> args)  async {
+ 
   runApp(const MyApp());
 }
 
@@ -21,18 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => HomescreenController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CartScreenController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ProductdetailScreenController(),
-        )
-      ],
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => ProductDetailingScreenController(),),
+      ChangeNotifierProvider(create: (context) => CartScreenController(),),
+      ChangeNotifierProvider(create: (context) => HomescreenController(),)
+    ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),

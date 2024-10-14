@@ -13,17 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
-        await context.read<HomescreenController>().getCategories();
-        await context.read<HomescreenController>().getAllProducts();
-      },
-    );
-    // TODO: implement initState
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
