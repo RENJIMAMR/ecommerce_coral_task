@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_application/cart_screen/widget/cart_item_widget.dart';
 import 'package:shopping_application/controller/cart_screen_controller.dart';
 import 'package:shopping_application/dress_detailing_screen/dress_detailing_screen.dart';
+import 'package:shopping_application/dress_listing_screen/dress_listing_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -104,16 +105,37 @@ class _CartScreenState extends State<CartScreen> {
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Container(
-                          padding: EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            color: Colors.cyan,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            'Checkout',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                        child: GestureDetector(
+                          onTap: () {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  backgroundColor: Colors.green,
+                                  content: Text(
+                                      'This image is already in the list.'),
+                                ))
+                                .closed
+                                .then((_) {
+                              // Navigate after the SnackBar closes
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListingScreen(),
+                                ),
+                              );
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(18),
+                            decoration: BoxDecoration(
+                              color: Colors.cyan,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              'Checkout',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       )
