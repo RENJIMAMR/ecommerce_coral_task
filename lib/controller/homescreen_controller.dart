@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopping_application/model/home_screen/product_model.dart';
@@ -13,7 +13,9 @@ class HomescreenController extends GetxController {
 
   // Fetch categories from the API
   Future<void> getCategories() async {
-    categoriesList = ["All"];
+    selectedCategoryIndex =
+        0; // to set the selected category  index to initial index
+    categoriesList = ["All"]; // to set the category list to  initial value
     try {
       final url = Uri.parse('https://fakestoreapi.com/products/categories');
       final response = await http.get(url);

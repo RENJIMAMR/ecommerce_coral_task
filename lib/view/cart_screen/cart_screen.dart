@@ -66,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                         padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.cyanAccent,
+                          color: Colors.grey.withOpacity(.5),
                         ),
                         height: 100,
                         child: Row(
@@ -107,7 +107,7 @@ class _CartScreenState extends State<CartScreen> {
                               child: Container(
                                 padding: const EdgeInsets.all(18),
                                 decoration: BoxDecoration(
-                                  color: Colors.cyan,
+                                  color: Colors.grey.withOpacity(.8),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Text(

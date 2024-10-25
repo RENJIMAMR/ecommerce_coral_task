@@ -49,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               height: 40,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.red),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blueGrey),
               child: Icon(
                 Icons.shopping_cart,
                 color: Colors.white,
