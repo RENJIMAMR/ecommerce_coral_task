@@ -68,7 +68,7 @@ class CartItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Row(
-                      // mainAxisAlignment: MainAxisAlignment.,
+                      
                       children: [
                         SizedBox(
                           height: 30,

@@ -1,96 +1,130 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:shopping_application/model/cart_screen/cart_model.dart';
+import 'package:flutter/material.dart';
 
-class CartScreenController with ChangeNotifier {
-  final cartBox = Hive.box<CartModel>('cartBox');
-  List keys = [];
-  Future<void> addToCart(
-      {required String title,
-      String? des,
-      num? id,
-      int qnty = 1,
-      String? img,
-      BuildContext? context,
-      required num price}) async {
-    bool alreadyInCart = false;
-    //to check whether the item already in cart
-    for (int i = 0; i < keys.length; i++) {
-      var itemInHive = cartBox.get(keys[i]);
-      if (itemInHive?.id == id) {
-        alreadyInCart = true;
-      }
+class CartScreenController extends GetxController {
+ 
+  Box<CartModel>?
+      cartBox; 
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize the Hive box
+    initializeBox();
+  }
+
+  Future<void> initializeBox() async {
+    try {
+      print('Opening cartBox...');
+      cartBox = await Hive.openBox<CartModel>('cartBox');
+      print('cartBox opened successfully');
+      update(); 
+    } catch (e) {
+      print('Error opening cartBox: $e');
     }
-    if (alreadyInCart == false) {
-      await cartBox.add(CartModel(
-          price: price, title: title, des: des, id: id, image: img, qty: qnty));
+  }
+
+  // List to hold the items in the cart
+  List<CartModel> get cartItems {
+    // Ensure that the box is initialized before accessing it
+    if (cartBox != null) {
+      return cartBox!.values.toList();
     } else {
-      ScaffoldMessenger.of(context!)
-          .showSnackBar(SnackBar(content: Text('Item Already Added')));
+      return []; // Return an empty list if box is not initialized
     }
-    notifyListeners();
   }
 
-  getAllCartItems() {
-    keys = cartBox.keys.toList();
-    notifyListeners();
-  }
-
-//for getting the current item
-  CartModel? getCurrentItem(var key) {
-    final currentItem = cartBox.get(key);
-    return currentItem;
-  }
-
-  removeItem(var key) async {
-    await cartBox.delete(key);
-    keys = cartBox.keys.toList();
-    notifyListeners();
-  }
-
-  incrementQty(var key) {
-    final currentItem = cartBox.get(key);
-    cartBox.put(
-        key,
-        CartModel(
-            price: currentItem!.price,
-            title: currentItem.title,
-            des: currentItem.des,
-            id: currentItem.id,
-            image: currentItem.image,
-            qty: ++currentItem.qty));
-    notifyListeners();
-  }
-
-  decrementQty(var key) {
-    final currentItem = cartBox.get(key);
-    if (currentItem!.qty >= 2) {
-      cartBox.put(
-          key,
-          CartModel(
-              price: currentItem!.price,
-              title: currentItem.title,
-              des: currentItem.des,
-              id: currentItem.id,
-              image: currentItem.image,
-              qty: --currentItem.qty));
+  // Method to add an item to the cart
+  void addToCart({
+    required String title,
+    required num price,
+    required BuildContext context,
+    required String description,
+    required num id,
+    required String image,
+  }) {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot add item.');
+      return; // Prevent adding if the box is not initialized
     }
-    notifyListeners();
+
+    CartModel newItem = CartModel(
+      title: title,
+      price: price,
+      des: description,
+      id: id.toInt(),
+      image: image,
+      qty: 1, // Default quantity
+    );
+
+    cartBox!.put(id, newItem); // Store the item using its ID as the key
+    update();
   }
 
-  calculateTotalAmount() {
-    double total = 0.0;
-    //iterate over each key in the keyList
-    for (var key in keys) {
-      //retrieve the item from box
-      final item = cartBox.get(key);
-      //check if the item is not null
-      if (item != null) {
-        total += item.qty * item.price;
-      }
+  // Increment quantity of an item in the cart
+  void incrementQty(int id) {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot increment quantity.');
+      return; // Prevent incrementing if the box is not initialized
     }
-    return total;
+
+    final currentItem = cartBox!.get(id);
+    if (currentItem != null) {
+      currentItem.qty += 1; // Increment quantity
+      cartBox!.put(id, currentItem); // Update the item in the box
+      update();
+    }
+  }
+
+  // Decrement quantity of an item in the cart
+  void decrementQty(int id) {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot decrement quantity.');
+      return; // Prevent decrementing if the box is not initialized
+    }
+
+    final currentItem = cartBox!.get(id);
+    if (currentItem != null && currentItem.qty > 1) {//the minimum quantity will always 1
+      currentItem.qty -= 1; // Decrement quantity
+      cartBox!.put(id, currentItem); // Update the item in the box
+      update();
+    }
+  }
+
+  // Method to remove an item from the cart by its ID
+  void removeFromCart(int id) {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot remove item.');
+      return; // Prevent removing if the box is not initialized
+    }
+
+    cartBox!.delete(id); // Remove the item using its ID as the key
+    update(); 
+    print('Item with ID: $id removed from cart.');
+  }
+
+  // Method to get total price of items in the cart
+  num getTotalPrice() {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot calculate total price.');
+      return 0; // Return 0 if the box is not initialized
+    }
+
+    return cartBox!.values
+        .fold<num>(0, (sum, item) => sum + item.price * item.qty);
+  }
+
+// Method to delete all items from the cart
+  void clearCart() {
+    if (cartBox == null) {
+      print('Cart box is not initialized. Cannot clear cart.');
+      return; // Prevent clearing if the box is not initialized
+    }
+
+    cartBox!.clear(); // Clear all items from the box
+    update(); 
+    print('All items removed from the cart.');
   }
 }

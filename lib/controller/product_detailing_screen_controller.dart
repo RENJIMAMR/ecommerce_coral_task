@@ -1,17 +1,17 @@
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:shopping_application/model/product_detailing_model.dart';
 
-class ProductdetailScreenController with ChangeNotifier {
-  ProductsDetailsModel? productDetailObj; //object making
+class ProductdetailScreenController extends GetxController {
+  ProductsDetailsModel? productDetailObj;
   bool isLoading = false;
+//get product details according to id
   Future<void> getProductDetails({required String id}) async {
     isLoading = true;
-    notifyListeners();
+    update();
     try {
       final url = Uri.parse("https://fakestoreapi.com/products/$id");
       var res = await http.get(url);
-      print(res.statusCode);
       if (res.statusCode == 200) {
         productDetailObj = productsDetailsModelFromJson(res.body);
       }
@@ -19,6 +19,6 @@ class ProductdetailScreenController with ChangeNotifier {
       print(e);
     }
     isLoading = false;
-    notifyListeners();
+    update();
   }
 }
