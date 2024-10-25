@@ -18,11 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    controller = Get.put(HomescreenController());
+
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        controller = Get.put(HomescreenController());
-        controller.getCategories();
-        controller.getAllProducts();
+      (timeStamp) async {
+        await controller.getCategories();
+        await controller.getAllProducts();
       },
     );
   }
