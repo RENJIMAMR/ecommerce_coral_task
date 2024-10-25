@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_application/controller/cart_screen_controller.dart';
 import 'package:shopping_application/controller/product_detailing_screen_controller.dart';
-import 'package:shopping_application/view/Home_screen/home_screen.dart';
+import 'package:shopping_application/view/home_screen/home_screen.dart';
 import 'package:shopping_application/view/cart_screen/cart_screen.dart';
 
 class DetailingScreen extends StatefulWidget {
@@ -14,29 +14,24 @@ class DetailingScreen extends StatefulWidget {
 }
 
 class _DetailingScreenState extends State<DetailingScreen> {
+  final ProductdetailScreenController controller =
+      Get.put(ProductdetailScreenController());
   @override
   void initState() {
     super.initState();
-    final ProductdetailScreenController controller =
-        Get.put(ProductdetailScreenController());
-    controller.getProductDetails(id: widget.id.toString());
-    Get.put(CartScreenController()); 
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        controller.getProductDetails(id: widget.id.toString());
+        Get.put(CartScreenController()); // to create
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            Get.off(HomeScreen());
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 30,
-          ),
-        ),
         title: Center(
           child: Text(
             'Details',
@@ -97,19 +92,6 @@ class _DetailingScreenState extends State<DetailingScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: Container(
-                                  height: 45,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(9),
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(Icons.favorite_border, size: 30),
                                 ),
                               ),
                             ]),
@@ -246,7 +228,6 @@ class _DetailingScreenState extends State<DetailingScreen> {
                                       controller.productDetailObj?.image ?? '',
                                 );
 
-                             
                                 Get.to(() => CartScreen());
                               }
                             },

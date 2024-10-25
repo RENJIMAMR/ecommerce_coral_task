@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopping_application/model/product_detailing_model.dart';
+import 'package:shopping_application/model/home_screen/product_model.dart';
 
 class ProductdetailScreenController extends GetxController {
-  ProductsDetailsModel? productDetailObj;
+  ProductsModel? productDetailObj;
   bool isLoading = false;
 //get product details according to id
   Future<void> getProductDetails({required String id}) async {

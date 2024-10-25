@@ -42,7 +42,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyA8EGVVFysEgfT6-qJvomf_hvI0YpLQtVg',
-    appId: '1:325081322031:web:5dedee94bf78fe1ec5acda',
+    appId: '1:325081322031:web:4f6084decf0e8071c5acda',
     messagingSenderId: '325081322031',
     projectId: 'sample-project-8f3e9',
     authDomain: 'sample-project-8f3e9.firebaseapp.com',
@@ -50,11 +50,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw',
-    appId: '1:325081322031:android:4551880e1c4a1042c5acda',
-    messagingSenderId: '325081322031',
-    projectId: 'sample-project-8f3e9',
-    storageBucket: 'sample-project-8f3e9.appspot.com',
+    apiKey: 'AIzaSyDL6hfsgpZdgqk9L8vRdPzEt7vnEdNBzmA',
+    appId: '1:863457149574:android:dd019a532e629ddd788707',
+    messagingSenderId: '863457149574',
+    projectId: 'coral-ecommerce-4d523',
+    storageBucket: 'coral-ecommerce-4d523.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'sample-project-8f3e9.firebaseapp.com',
     storageBucket: 'sample-project-8f3e9.appspot.com',
   );
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_application/controller/cart_screen_controller.dart';
-import 'package:shopping_application/view/Home_screen/home_screen.dart';
+import 'package:shopping_application/view/home_screen/home_screen.dart';
 import 'package:shopping_application/view/cart_screen/widget/cart_item_widget.dart';
 
 class CartScreen extends StatefulWidget {
@@ -39,16 +39,13 @@ class _CartScreenState extends State<CartScreen> {
                           final cartItem = controller.cartItems[index];
                           return CartItemWidget(
                             onRemove: () {
-                              controller
-                                  .removeFromCart(cartItem.id!); 
+                              controller.removeFromCart(cartItem.id!);
                             },
                             onDecrement: () {
-                              controller
-                                  .decrementQty(cartItem.id!); 
+                              controller.decrementQty(cartItem.id!);
                             },
                             onIncrement: () {
-                              controller
-                                  .incrementQty(cartItem.id!); 
+                              controller.incrementQty(cartItem.id!);
                             },
                             title: cartItem.title,
                             qty: cartItem.qty.toString(),
@@ -95,9 +92,6 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                              
-
-                                
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     duration: Duration(seconds: 1),
@@ -107,8 +101,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 );
 
-                              
-                                Get.to(HomeScreen());
+                                Get.offAll(HomeScreen());
                                 controller.clearCart();
                               },
                               child: Container(

@@ -8,7 +8,7 @@ class RegistrationScreenController extends GetxController {
   bool isLoading = false;
   onRegister(
       {required String email,
-      required String pass,
+      required String pass1,
       required BuildContext context}) async {
     isLoading = true;
     update();
@@ -16,7 +16,7 @@ class RegistrationScreenController extends GetxController {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
-        password: pass,
+        password: pass1,
       );
       if (credential.user?.uid != null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

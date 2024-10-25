@@ -13,6 +13,7 @@ class HomescreenController extends GetxController {
 
   // Fetch categories from the API
   Future<void> getCategories() async {
+    categoriesList = ["All"];
     try {
       final url = Uri.parse('https://fakestoreapi.com/products/categories');
       final response = await http.get(url);
@@ -27,7 +28,7 @@ class HomescreenController extends GetxController {
       print("Error fetching categories: $e");
     }
     isCategoriesLoading = false;
-    update(); 
+    update();
   }
 
   // Fetch products based on selected category
@@ -43,7 +44,7 @@ class HomescreenController extends GetxController {
       final response = await http.get(url);
       print("Products response status: ${response.statusCode}");
       if (response.statusCode == 200) {
-        productList = productsModelFromJson(response.body);
+        productList = productslistModelFromJson(response.body);
         print("Fetched products: $productList");
       } else {
         print("Failed to fetch products");
@@ -52,7 +53,7 @@ class HomescreenController extends GetxController {
       print("Error fetching products: $e");
     }
     isProductLoading = false;
-    update(); 
+    update();
   }
 
   // Set selected category and fetch products
@@ -60,6 +61,6 @@ class HomescreenController extends GetxController {
     selectedCategoryIndex = index;
     String selectedCategory = categoriesList[index];
     getAllProducts(category: selectedCategory == "All" ? "" : selectedCategory);
-    update(); 
+    update();
   }
 }

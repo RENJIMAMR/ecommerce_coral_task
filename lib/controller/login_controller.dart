@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_sample/views/home_screen/home_screen.dart';
-import 'package:firebase_sample/views/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-class LoginController extends GetxController  {
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:shopping_application/view/home_screen/home_screen.dart';
+
+class LoginController extends GetxController {
   bool isLoading = false;
   onLogin(
       {required String email,
       required String pass,
       required BuildContext context}) async {
     isLoading = true;
-         update(); 
+    update();
 
     try {
       final credential = await FirebaseAuth.instance
@@ -34,7 +34,6 @@ class LoginController extends GetxController  {
       }
     }
     isLoading = false;
-         update(); 
-
+    update();
   }
 }

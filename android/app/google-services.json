@@ -1,89 +1,13 @@
 {
   "project_info": {
-    "project_number": "325081322031",
-    "project_id": "sample-project-8f3e9",
-    "storage_bucket": "sample-project-8f3e9.appspot.com"
+    "project_number": "863457149574",
+    "project_id": "coral-ecommerce-4d523",
+    "storage_bucket": "coral-ecommerce-4d523.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:325081322031:android:0855b2e58bd7cb1dc5acda",
-        "android_client_info": {
-          "package_name": "com.example.carify_clone_two"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:325081322031:android:343de399c828de7fc5acda",
-        "android_client_info": {
-          "package_name": "com.example.e_"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:325081322031:android:d354ae21e2922469c5acda",
-        "android_client_info": {
-          "package_name": "com.example.firebase_notification_sample"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:325081322031:android:1d66e0664a9ec7b4c5acda",
-        "android_client_info": {
-          "package_name": "com.example.firebase_sample"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:325081322031:android:4551880e1c4a1042c5acda",
+        "mobilesdk_app_id": "1:863457149574:android:dd019a532e629ddd788707",
         "android_client_info": {
           "package_name": "com.example.shopping_application"
         }
@@ -91,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDeAnoK_yurr_uiD46eeSH2jk4xu75HrXw"
+          "current_key": "AIzaSyDL6hfsgpZdgqk9L8vRdPzEt7vnEdNBzmA"
         }
       ],
       "services": {
